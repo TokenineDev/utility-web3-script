@@ -24,17 +24,19 @@ const tokenContract = new ethers.Contract(tokenAddress, erc20ABI, signer)
 // One transfer will use gas in xchain 20 gwei * 75000 = 1500000 gwei.
 // Then, one transfer will use gas about 0.0015 XTH
 
-const wallets = [{
-  address: '0x626939e224FbD56F5DE5b244dC04f8a1cEF40613',
-  amount: 10 // unit in
-}]
+const wallets = [
+  {
+    address: '0x626939e224FbD56F5DE5b244dC04f8a1cEF40613',
+    amount: '100'
+  },
+]
 
 const runTransfer = async () => {
   try {
     for (const wallet of wallets) {
       const response = await tokenContract.transfer(
         wallet.address,
-        ethers.utils.parseEther(amount) // change ether to wei unit
+        ethers.utils.parseEther(wallet.amount) // change ether to wei unit
       )
       console.log(response)
     }
